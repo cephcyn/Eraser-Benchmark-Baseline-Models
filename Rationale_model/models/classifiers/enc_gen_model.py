@@ -58,7 +58,11 @@ class EncoderGeneratorModel(RationaleBaseModel):
         prob_z = kept_tokens.float() + prob_z * (1 - kept_tokens)
         sampler = D.bernoulli.Bernoulli(probs=prob_z)
 
-        sample_z = mask.float()
+        if self.training :
+            sample_z = sampler.sample()
+        else :
+            sample_z = generator_dict['predicted_rationale'].float()
+            
         encoder_dict = self._encoder(sample_z=sample_z, label=label, metadata=metadata)
 
         loss = 0.0
