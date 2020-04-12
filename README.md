@@ -1,3 +1,10 @@
+Setup
+----------
+
+1. Clone the main repository for ERASER benchmark: <https://github.com/jayded/eraserbenchmark>. By default I assume this is cloned into the same directory as this repository was, so you will need to change any `sys.path.append` calls if otherwise.
+
+2. Set up python virtual environment using `requirements.txt`
+
 For Lei et al. Encoder Generator Model
 ---------------------------------------
 

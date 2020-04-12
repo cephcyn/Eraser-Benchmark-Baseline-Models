@@ -8,6 +8,7 @@ export TEST_DATA_PATH=$data_base_path/test.jsonl
 
 export OUTPUT_BASE_PATH=${output_dir:-outputs}/$classifier/${dataset_name:?"set dataset name"}/${exp_name:?"set exp name"}
 
+export CUDA_DEVICE=0 # -1 to use CPU, or change to use a different GPU
 export SEED=${random_seed:-100}
 
 allennlp train -s $OUTPUT_BASE_PATH --include-package Rationale_model --force $CONFIG_FILE

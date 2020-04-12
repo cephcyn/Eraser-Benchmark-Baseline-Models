@@ -9,6 +9,10 @@ from allennlp.data.instance import Instance
 from allennlp.data.token_indexers import TokenIndexer
 from allennlp.data.tokenizers import Token
 
+# Import ERASER benchmark
+import sys
+sys.path.append('../eraserbenchmark')
+
 from rationale_benchmark.utils import annotations_from_jsonl, load_flattened_documents, Evidence
 
 
