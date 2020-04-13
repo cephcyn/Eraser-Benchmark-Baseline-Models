@@ -40,7 +40,7 @@ bash Rationale_model/commands/model_predict.sh
 python rationale_benchmark/metrics.py \
 --data_dir data/movies \
 --split test \
---results outputs/bert_encoder_generator/movies/$EXP_NAME/test_prediction.jsonl
+--results outputs/bert_encoder_generator/movies/$EXP_NAME/test_prediction.jsonl \
 --score_file outputs/bert_encoder_generator/movies/$EXP_NAME/test_scores.json
 ```
 
@@ -79,7 +79,7 @@ bash Rationale_model/commands/model_predict.sh
 python rationale_benchmark/metrics.py \
 --data_dir data/movies \
 --split test \
---results outputs/soft_bert/movies/$EXP_NAME/$saliency/test_prediction.jsonl
+--results outputs/soft_bert/movies/$EXP_NAME/$saliency/test_prediction.jsonl \
 --score_file outputs/soft_bert/movies/$EXP_NAME/$saliency/test_scores.json
 ```
 To train GloVe-LSTM models, please replace `soft_bert` with `soft_word_emb` in above code.
