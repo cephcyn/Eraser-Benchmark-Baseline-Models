@@ -5,6 +5,10 @@ Setup
 
 2. Set up python virtual environment using `requirements.txt`
 
+3. Set up environment variables - check `envs.sh`
+
+4. Don't forget to download the appropriate datasets (see main ERASER benchmark repository for details)
+
 For Lei et al. Encoder Generator Model
 ---------------------------------------
 
