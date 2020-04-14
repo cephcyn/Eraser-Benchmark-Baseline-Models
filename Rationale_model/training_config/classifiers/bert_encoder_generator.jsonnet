@@ -41,7 +41,7 @@ local is_cose = if std.findSubstr('cose', std.extVar('TRAIN_DATA_PATH')) == [] t
           bert: {
             type: "bert-pretrained",
             pretrained_model: 'bert-base-uncased',
-            requires_grad: '11,10,pooler',
+            requires_grad: false,
           },
         },
       },
@@ -69,7 +69,7 @@ local is_cose = if std.findSubstr('cose', std.extVar('TRAIN_DATA_PATH')) == [] t
           bert: {
             type: "bert-pretrained",
             pretrained_model: 'bert-base-uncased',
-            requires_grad: '11,10,pooler',
+            requires_grad: false,
           },
         },
       },
@@ -106,8 +106,8 @@ local is_cose = if std.findSubstr('cose', std.extVar('TRAIN_DATA_PATH')) == [] t
     biggest_batch_first: true
   },
   trainer: {
-    num_epochs: 20,
-    patience: 5,
+    num_epochs: 50,
+    patience: 0,
     grad_norm: 10.0,
     validation_metric: "+accuracy",
     num_serialized_models_to_keep: 1,
