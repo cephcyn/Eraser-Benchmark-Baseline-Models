@@ -1,11 +1,12 @@
 Setup
 ----------
 
-1. Clone the main repository for ERASER benchmark: <https://github.com/jayded/eraserbenchmark>. By default I assume this is cloned into the same directory as this repository was, so you will need to change any `sys.path.append` calls if otherwise.
+1. Clone the main repository for ERASER benchmark: <https://github.com/jayded/eraserbenchmark>.
 
 2. Set up python virtual environment using `requirements.txt`
 
 3. Set up environment variables - check `envs.sh`
+    - Make sure the path to ERASER benchmark main repo is correct, since the baseline models need to be able to import it
 
 4. Don't forget to download the appropriate datasets (see main ERASER benchmark repository for details)
 
