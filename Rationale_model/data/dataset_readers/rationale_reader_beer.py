@@ -54,10 +54,16 @@ class RationaleReader(DatasetReader):
 
         # handle the review text itself (tokens)
         tokens_list = self._tokenizer.tokenize(tokens) #[Token(word.strip()) for word in tokens.split(" ")]
+        tokens_list.append(Token("[SEP]"))
+        # and add the question text, because this model treats NLP task as a QA task
+        query_words = "What is the sentiment of this review?".split()
+        tokens_list += [Token(word) for word in query_words]
+        tokens_list.append(Token("[SEP]"))
+        
         fields["document"] = TextField(tokens_list, self._token_indexers)
 
         # handle the kept_tokens mask (TODO: figure out what exactly this does?)
-        always_keep_mask = [0 for t in tokens_list]
+        always_keep_mask = [1 if t.text.upper() == "[SEP]" else 0 for t in tokens]
         fields["kept_tokens"] = SequenceLabelField(
             always_keep_mask, sequence_field=fields["document"], label_namespace="kept_token_labels"
         )
@@ -66,7 +72,9 @@ class RationaleReader(DatasetReader):
         if label is not None:
             fields["label"] = LabelField(label, label_namespace="labels")
 
-        metadata = {}
+        metadata = {
+            "tokens": tokens_list,
+        }
         # handle the testid metadata if we got any
         if testid is not None:
             metadata["testid"] = testid
