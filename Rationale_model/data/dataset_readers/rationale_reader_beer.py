@@ -56,6 +56,12 @@ class RationaleReader(DatasetReader):
         tokens_list = self._tokenizer.tokenize(tokens) #[Token(word.strip()) for word in tokens.split(" ")]
         fields["document"] = TextField(tokens_list, self._token_indexers)
 
+        # handle the kept_tokens mask (TODO: figure out what exactly this does?)
+        always_keep_mask = [0 for t in tokens_list]
+        fields["kept_tokens"] = SequenceLabelField(
+            always_keep_mask, sequence_field=fields["document"], label_namespace="kept_token_labels"
+        )
+
         # handle the label if we got one
         if label is not None:
             fields["label"] = LabelField(label, label_namespace="labels")
