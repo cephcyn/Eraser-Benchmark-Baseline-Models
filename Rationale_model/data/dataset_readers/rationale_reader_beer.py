@@ -51,9 +51,11 @@ class RationaleReader(DatasetReader):
     ) -> Instance:  # type: ignore
         # pylint: disable=arguments-differ
         fields = {}
+        document_to_span_map = {} # TODO figure out how critical this is to the model
 
         # handle the review text itself (tokens)
         tokens_list = self._tokenizer.tokenize(tokens) #[Token(word.strip()) for word in tokens.split(" ")]
+        document_to_span_map[testid] = (0, len(tokens_list))
         tokens_list.append(Token("[SEP]"))
         # and add the question text, because this model treats NLP task as a QA task
         query_words = "What is the sentiment of this review?".split()
@@ -74,10 +76,12 @@ class RationaleReader(DatasetReader):
 
         metadata = {
             "tokens": tokens_list,
+            "document_to_span_map": document_to_span_map,
             "convert_tokens_to_instance": self.convert_tokens_to_instance,
         }
         # handle the testid metadata if we got any
         if testid is not None:
+            metadata["annotation_id"] = testid
             metadata["testid"] = testid
 
         fields["metadata"] = MetadataField(metadata)
