@@ -107,7 +107,7 @@ local is_cose = if std.findSubstr('cose', std.extVar('TRAIN_DATA_PATH')) == [] t
   },
   trainer: {
     num_epochs: 50,
-    patience: 0,
+    patience: 55,
     grad_norm: 10.0,
     validation_metric: "+accuracy",
     num_serialized_models_to_keep: 1,

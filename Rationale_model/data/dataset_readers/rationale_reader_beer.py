@@ -63,7 +63,7 @@ class RationaleReader(DatasetReader):
         fields["document"] = TextField(tokens_list, self._token_indexers)
 
         # handle the kept_tokens mask (TODO: figure out what exactly this does?)
-        always_keep_mask = [1 if t.upper() == "[SEP]" else 0 for t in tokens_list]
+        always_keep_mask = [1 if t.text.upper() == "[SEP]" else 0 for t in tokens_list]
         fields["kept_tokens"] = SequenceLabelField(
             always_keep_mask, sequence_field=fields["document"], label_namespace="kept_token_labels"
         )
@@ -74,6 +74,7 @@ class RationaleReader(DatasetReader):
 
         metadata = {
             "tokens": tokens_list,
+            "convert_tokens_to_instance": self.convert_tokens_to_instance,
         }
         # handle the testid metadata if we got any
         if testid is not None:
@@ -82,3 +83,6 @@ class RationaleReader(DatasetReader):
         fields["metadata"] = MetadataField(metadata)
 
         return Instance(fields)
+
+    def convert_tokens_to_instance(self, tokens, labels=None):
+        return [Instance({"document": TextField(tokens, self._token_indexers)})]
