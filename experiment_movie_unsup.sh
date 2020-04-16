@@ -2,21 +2,21 @@
 export PYTHONPATH=/home/username/Documents:${PYTHONPATH}
 
 # experiment name (what the model is going to be named)
-export EXP_NAME="movie_reproduce_exp_50_supervised"
+export EXP_NAME="movie_5_u"
 
 # CUDA device to use (-1 to use CPU, change to use a different GPU)
 export CUDA_DEVICE=0
 
 # output file to save to
-export OUTPUT_FILENAME="output_supervised_50e.txt"
+export OUTPUT_FILENAME="output_movie_5_u.txt"
 
 dataset_folder=data/movies \
 	dataset_name=movies \
 	classifier=bert_encoder_generator \
 	output_dir=outputs \
 	exp_name=$EXP_NAME \
-	batch_size=4 \
-	rs_weight=1 \
+	batch_size=1 \
+	rs_weight=0 \
 	bash Rationale_model/commands/model_train_script.sh >> ${OUTPUT_FILENAME} 2>&1
 
 dataset_folder=data/movies \

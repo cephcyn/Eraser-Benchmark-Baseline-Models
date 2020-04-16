@@ -56,11 +56,12 @@ class RationaleReader(DatasetReader):
         # handle the review text itself (tokens)
         tokens_list = self._tokenizer.tokenize(tokens) #[Token(word.strip()) for word in tokens.split(" ")]
         document_to_span_map[testid] = (0, len(tokens_list))
-        tokens_list.append(Token("[SEP]"))
+        num_src_tokens = len(tokens_list)
+        tokens_list += [Token("[SEP]")]
         # and add the question text, because this model treats NLP task as a QA task
         query_words = "What is the sentiment of this review?".split()
         tokens_list += [Token(word) for word in query_words]
-        tokens_list.append(Token("[SEP]"))
+        tokens_list += [Token("[SEP]")]
 
         fields["document"] = TextField(tokens_list, self._token_indexers)
 
@@ -68,6 +69,12 @@ class RationaleReader(DatasetReader):
         always_keep_mask = [1 if t.text.upper() == "[SEP]" else 0 for t in tokens_list]
         fields["kept_tokens"] = SequenceLabelField(
             always_keep_mask, sequence_field=fields["document"], label_namespace="kept_token_labels"
+        )
+
+        # rationale (TODO: figure out what impact not highlighting a 'correct' rationale has ?????)
+        is_evidence = ([0] * num_src_tokens) + [1] + ([1] * len(query_words)) + [1]
+        fields["rationale"] = SequenceLabelField(
+            is_evidence, sequence_field=fields["document"], label_namespace="evidence_labels"
         )
 
         # handle the label if we got one
