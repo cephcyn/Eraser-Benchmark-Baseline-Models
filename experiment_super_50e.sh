@@ -31,4 +31,4 @@ python rationale_benchmark/metrics.py \
 	--data_dir data/movies \
 	--split test \
 	--results outputs/bert_encoder_generator/movies/$EXP_NAME/test_prediction.jsonl \
-        --score_file outputs/bert_encoder_generator/movies/$EXP_NAME/test_scores.json >> ${OUTPUT_FILENAME} 2>&1
+  --score_file outputs/bert_encoder_generator/movies/$EXP_NAME/test_scores.json >> ${OUTPUT_FILENAME} 2>&1

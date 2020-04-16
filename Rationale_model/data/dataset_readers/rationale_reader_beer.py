@@ -60,11 +60,11 @@ class RationaleReader(DatasetReader):
         if label is not None:
             fields["label"] = LabelField(label, label_namespace="labels")
 
-        # handle the reference back to unique testid if we got one
-        # handle the label if we got one
+        metadata = {}
+        # handle the testid metadata if we got any
         if testid is not None:
-            fields["testid"] = MetadataField({
-                "testid": testid,
-            })
+            metadata["testid"] = testid
+
+        fields["metadata"] = MetadataField(metadata)
 
         return Instance(fields)
