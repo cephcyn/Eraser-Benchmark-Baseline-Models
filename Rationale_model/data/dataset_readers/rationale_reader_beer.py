@@ -63,7 +63,7 @@ class RationaleReader(DatasetReader):
         fields["document"] = TextField(tokens_list, self._token_indexers)
 
         # handle the kept_tokens mask (TODO: figure out what exactly this does?)
-        always_keep_mask = [1 if t.text.upper() == "[SEP]" else 0 for t in tokens]
+        always_keep_mask = [1 if t.upper() == "[SEP]" else 0 for t in tokens]
         fields["kept_tokens"] = SequenceLabelField(
             always_keep_mask, sequence_field=fields["document"], label_namespace="kept_token_labels"
         )
