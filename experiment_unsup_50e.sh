@@ -15,7 +15,7 @@ dataset_folder=data/movies \
 	classifier=bert_encoder_generator \
 	output_dir=outputs \
 	exp_name=$EXP_NAME \
-	batch_size=4 \
+	batch_size=1 \
 	rs_weight=0 \
 	bash Rationale_model/commands/model_train_script.sh >> ${OUTPUT_FILENAME} 2>&1
 
