@@ -94,7 +94,7 @@ local is_cose = if std.findSubstr('cose', std.extVar('TRAIN_DATA_PATH')) == [] t
         dropout: 0.2
       },
     },
-    reg_loss_lambda: 0.01,
+    reg_loss_lambda: 25.0,
     reg_loss_mu: 2.0,
     reinforce_loss_weight: 1.0,
     rationale_supervision_loss_weight: std.extVar('rs_weight')
@@ -106,8 +106,8 @@ local is_cose = if std.findSubstr('cose', std.extVar('TRAIN_DATA_PATH')) == [] t
     biggest_batch_first: true
   },
   trainer: {
-    num_epochs: 20,
-    patience: 5,
+    num_epochs: 1,
+    patience: 15,
     grad_norm: 10.0,
     validation_metric: "+accuracy",
     num_serialized_models_to_keep: 1,

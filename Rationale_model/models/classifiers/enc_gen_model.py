@@ -124,10 +124,12 @@ class EncoderGeneratorModel(RationaleBaseModel):
         soft_scores = output_dict["prob_z"].cpu().data.numpy()
 
         new_output_dict["rationales"] = []
+        new_output_dict["soft_scores"] = []
 
         for rationale, ss, mask, m in zip(predicted_rationales, soft_scores, masks, metadata):
             rationale = rationale[mask == 1]
             ss = ss[mask == 1]
+            new_output_dict["soft_scores"].append(ss)
 
             document_to_span_map = m["document_to_span_map"]
             document_rationale = []
